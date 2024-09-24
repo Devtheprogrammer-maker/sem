@@ -1,7 +1,7 @@
 # Testing this _markdown_ **language**
 >Education is not a competiion
 
-[Link to google](google.com)  
+[Link to google](https://www.google.com)  
 
 ![Cat](https://www.akc.org/wp-content/uploads/2017/11/Siberian-Husky-standing-outdoors-in-the-winter.jpg)
 
