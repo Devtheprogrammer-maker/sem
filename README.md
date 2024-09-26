@@ -5,7 +5,7 @@
 
 ![Cat](https://www.akc.org/wp-content/uploads/2017/11/Siberian-Husky-standing-outdoors-in-the-winter.jpg)
 
-![Husky] [Dog]
+![Husky][Dog]
 
 [Dog]: https://www.akc.org/wp-content/uploads/2017/11/Siberian-Husky-standing-outdoors-in-the-winter.jpg
 
