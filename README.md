@@ -17,4 +17,4 @@
 4. CSS
 5. HTML
 6. Java
-7. Mark down
+7. Mark up
