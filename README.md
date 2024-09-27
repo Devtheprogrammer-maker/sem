@@ -18,3 +18,6 @@
 5. HTML
 6. Java
 7. SQL
+
+#Badges
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Devtheprogrammer-maker/sem/main.yml?branch=main.yml)
