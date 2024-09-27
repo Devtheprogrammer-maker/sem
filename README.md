@@ -10,7 +10,7 @@
 [Dog]: https://www.akc.org/wp-content/uploads/2017/11/Siberian-Husky-standing-outdoors-in-the-winter.jpg
 
 ## Languages That I like
----
+
 1. PHP
 2. C++
 3. Python
@@ -20,6 +20,6 @@
 7. SQL
 
 # Badges
-![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Devtheprogrammer-maker/sem/main.yml?branch=master)
-[![LICENSE](https://img.shields.io/github/license/<github-username>/sem.svg?style=flat-square)](https://github.com/Devtheprogrammer-maker/sem/blob/master/LICENSE)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Devtheprogrammer-maker/sem/main.yml?branch=master)   
+[![LICENSE](https://img.shields.io/github/license/Devtheprogrammer-maker/sem.svg?style=flat-square)](https://github.com/Devtheprogrammer-maker/sem/blob/master/LICENSE)   
 [![Releases](https://img.shields.io/github/release/<github-username>/sem/all.svg?style=flat-square)](https://github.com/Devtheprogrammer-maker/sem/releases)
