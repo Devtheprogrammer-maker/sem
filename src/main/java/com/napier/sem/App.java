@@ -11,7 +11,7 @@ public class App
     {
         // Connect to MongoDB on local system - we're using port 27017
         // Update the connection string to use the correct MongoDB container name
-        MongoClient mongoClient = new MongoClient("mongo-dbserver2");
+        MongoClient mongoClient = new MongoClient("mongo-dbserver");
 
 
         // Get a database - will create when we use it
