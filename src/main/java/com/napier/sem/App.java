@@ -26,18 +26,9 @@ public class App {
 
         a.report2();
 
-        // Keep the app running for 60 seconds
-        try {
-            System.out.println("Sleeping for 60 seconds...");
-            Thread.sleep(60000); // 60 seconds
-        } catch (InterruptedException e) {
-            System.out.println("Sleep interrupted.");
-        }
-
         // Disconnect from database
         a.disconnect();
     }
-
 
     public void report2() throws IOException {
         StringBuilder sb = new StringBuilder();
