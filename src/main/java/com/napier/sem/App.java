@@ -26,6 +26,8 @@ public class App {
 
         a.report2();
 
+        City city = a.getCity(1);
+        a.displayCity(city);
         // Disconnect from database
         a.disconnect();
     }
@@ -59,6 +61,60 @@ public class App {
 
         System.out.println(sb.toString());
     }
+
+    //Display City
+    public void displayCity(City city) throws IOException
+    {
+        if (city != null)
+        {
+            System.out.println(
+                    "ID: " + city.ID + "\n"
+                            + "City:" + city.Name + "\n"
+                            + "Code:" + city.CountryCode + "\n"
+                            + "District:" + city.District + "\n"
+                            + "Population:" + city.Population + "\n");
+        }
+    }
+
+    //    To get city info
+    public City getCity(int ID)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ID, Name, CountryCode, District, Population "
+                            + "FROM city "
+                            + "WHERE ID = " + ID;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Check if a result is returned
+            if (rset.next())
+            {
+                City city = new City();
+                city.ID = rset.getInt("ID");
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                return city;
+            }
+            else {
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+
+
 
     /**
      * Connect to the MySQL database.
