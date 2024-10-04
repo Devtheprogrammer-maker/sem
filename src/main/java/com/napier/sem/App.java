@@ -34,32 +34,32 @@ public class App {
 
     public void report2() throws IOException {
         StringBuilder sb = new StringBuilder();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String sql = "select * from country";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(sql);
-            //cycle
-            while (rset.next()) {
-                String name = rset.getString("name");
-                Integer population = rset.getInt("population");
-                sb.append(name + "\t" + population + "\r\n");
-            }
-            new File("./output/").mkdir();
-            BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(new File("./output/report1.txt")));
-            writer.write(sb.toString());
-            writer.close();
-            System.out.println(sb.toString());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get details");
-            return;
-        }
-
-        System.out.println(sb.toString());
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String sql = "select * from country";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(sql);
+//            //cycle
+//            while (rset.next()) {
+//                String name = rset.getString("name");
+//                Integer population = rset.getInt("population");
+//                sb.append(name + "\t" + population + "\r\n");
+//            }
+//            new File("./output/").mkdir();
+//            BufferedWriter writer = new BufferedWriter(
+//                    new FileWriter(new File("./output/report1.txt")));
+//            writer.write(sb.toString());
+//            writer.close();
+//            System.out.println(sb.toString());
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get details");
+//            return;
+//        }
+//
+//        System.out.println(sb.toString());
     }
 
     //Display City
