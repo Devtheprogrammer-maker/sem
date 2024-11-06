@@ -38,6 +38,8 @@ jobs:
         run: |
           docker build -t database ./db 
           docker run --name world -dp 33060:3306 database
+          # Add a small delay to ensure database is ready
+          sleep 10
           mvn -Dtest=com.napier.sem.AppIntegrationTest test          
           docker stop world
           docker rm world
@@ -45,10 +47,10 @@ jobs:
       - name: CodeCov
         uses: codecov/codecov-action@v4.0.1
         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # now required for public repos too
+          token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./target/site/jacoco
-          flags: Integration Tests # optional
-          verbose: true # optional (default = false)
+          flags: Integration Tests
+          verbose: true
           slug: Devtheprogrammer-maker/sem
   build:
     name: Build and Start Using docker-compose
