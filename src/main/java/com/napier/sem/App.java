@@ -18,7 +18,7 @@ public class App {
 
         if (args.length < 1) {
             //local
-            a.connect("localhost:33060", 0);
+            a.connect("localhost:33060", 10000);
         } else {
             //docker parameters passed from Dockerfile
             a.connect(args[0], Integer.parseInt(args[1]));
@@ -134,11 +134,13 @@ public class App {
         }
 
         int retries = 10;
+        boolean shouldWait = false;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
-                // Wait a bit for db to start
-                Thread.sleep(delay);
+                if (shouldWait) {
+                    Thread.sleep(delay);
+                }
                 // Connect to database
                 //Added allowPublicKeyRetrieval=true to get Integration Tests
                 // to work. Possibly due to accessing from another class?
@@ -151,6 +153,7 @@ public class App {
                 System.out.println("Failed to connect to database attempt "
                         + Integer.toString(i));
                 System.out.println(sqle.getMessage());
+                shouldWait = true;
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
