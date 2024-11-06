@@ -1,30 +1,28 @@
-import com.napier.sem.App;
-import com.napier.sem.City;
+package com.napier.sem;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.Assert.assertEquals;
-
-public class AppIntegrationTest
-{
+public class AppIntegrationTest {
     static App app;
 
     @BeforeAll
-    static void init()
-    {
+    static void init() {
         app = new App();
-        app.connect("localhost:33060", 10000);
-
     }
 
     @Test
-    void testGetEmployee()
-    {
+    void testGetCity() {
+        // Add a simple test first to verify test execution
+        assertTrue(true, "This test should always pass");
+
+        // Your actual test code here
         City city = app.getCity(1);
-        assertEquals(city.ID, 1);
-        assertEquals(city.Name, "Kabul");
-        assertEquals(city.CountryCode, "AFG");
-        assertEquals(city.District, "Kabol");
-        assertEquals(city.Population, "1780000");
+        assertEquals(1, city.ID);
+        assertEquals("Kabul", city.Name);
+        assertEquals("AFG", city.CountryCode);
+        assertEquals("Kabol", city.District);
+        assertEquals("1780000", city.Population);
     }
 }
