@@ -47,7 +47,7 @@ public class App {
                 String countryCode = rset.getString("CountryCode");
                 String district = rset.getString("District");
                 Integer population = rset.getInt("Population");
-                City city = new City(id, name, countryCode, district, population);
+                City city = new City();
                 cities.add(city);
             }
 
@@ -94,7 +94,6 @@ public class App {
      * @param conString
      * 		Use db:3306 for docker and localhost:33060 for local or Integration
      * 		Tests
-     * @param
      */
     public void connect(String conString, int delay) {
         try {

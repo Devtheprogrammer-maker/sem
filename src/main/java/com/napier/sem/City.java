@@ -31,6 +31,6 @@ public class City
     public int Population;
 
 
-    public City(Integer id, String name, String countryCode, String district, Integer population) {
-    }
+//    public City(Integer id, String name, String countryCode, String district, Integer population) {
+//    }
 }
