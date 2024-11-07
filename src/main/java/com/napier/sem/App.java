@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App {
 
@@ -17,103 +18,74 @@ public class App {
         App a = new App();
 
         if (args.length < 1) {
-            //local
-            a.connect("localhost:33060", 10000);
+            a.connect("localhost:33060", 0);
         } else {
-            //docker parameters passed from Dockerfile
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
+        a.printCityReport(a.getCities());
         a.report2();
 
-        City city = a.getCity(1);
-        a.displayCity(city);
         // Disconnect from database
         a.disconnect();
     }
 
-    public void report2() throws IOException {
-        StringBuilder sb = new StringBuilder();
-//        try {
-//            // Create an SQL statement
-//            Statement stmt = con.createStatement();
-//            // Create string for SQL statement
-//            String sql = "select * from country";
-//            // Execute SQL statement
-//            ResultSet rset = stmt.executeQuery(sql);
-//            //cycle
-//            while (rset.next()) {
-//                String name = rset.getString("name");
-//                Integer population = rset.getInt("population");
-//                sb.append(name + "\t" + population + "\r\n");
-//            }
-//            new File("./output/").mkdir();
-//            BufferedWriter writer = new BufferedWriter(
-//                    new FileWriter(new File("./output/report1.txt")));
-//            writer.write(sb.toString());
-//            writer.close();
-//            System.out.println(sb.toString());
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            System.out.println("Failed to get details");
-//            return;
-//        }
-//
-//        System.out.println(sb.toString());
-    }
+    public ArrayList<City> getCities() {
+        ArrayList<City> cities = new ArrayList<>();
+        try {
 
-    //Display City
-    public void displayCity(City city) throws IOException
-    {
-        if (city != null)
-        {
-            System.out.println(
-                    "ID: " + city.ID + "\n"
-                            + "City:" + city.Name + "\n"
-                            + "Code:" + city.CountryCode + "\n"
-                            + "District:" + city.District + "\n"
-                            + "Population:" + city.Population + "\n");
-        }
-    }
-
-    //    To get city info
-    public City getCity(int ID)
-    {
-        try
-        {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            String strSelect =
-                    "SELECT ID, Name, CountryCode, District, Population "
-                            + "FROM city "
-                            + "WHERE ID = " + ID;
+            String sql = "select * from city";
             // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Check if a result is returned
-            if (rset.next())
-            {
-                City city = new City();
-                city.ID = rset.getInt("ID");
-                city.Name = rset.getString("Name");
-                city.CountryCode = rset.getString("CountryCode");
-                city.District = rset.getString("District");
-                city.Population = rset.getInt("Population");
-                return city;
+            ResultSet rset = stmt.executeQuery(sql);
+            //cycle
+            while (rset.next()) {
+                Integer id = rset.getInt("ID");
+                String name = rset.getString("Name");
+                String countryCode = rset.getString("CountryCode");
+                String district = rset.getString("District");
+                Integer population = rset.getInt("Population");
+                City city = new City(id, name, countryCode, district, population);
+                cities.add(city);
             }
-            else {
-                return null;
-            }
-        }
-        catch (Exception e)
-        {
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("Failed to get details");
             return null;
         }
+        return  cities;
     }
 
-
+    public void report2() {
+        StringBuilder sb = new StringBuilder();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String sql = "select * from country";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(sql);
+            //cycle
+            while (rset.next()) {
+                String name = rset.getString("name");
+                Integer population = rset.getInt("population");
+                sb.append(name + "\t" + population + "\r\n");
+            }
+            new File("./output/").mkdir();
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(new File("./output/report1.txt")));
+            writer.write(sb.toString());
+            writer.close();
+            System.out.println(sb.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return;
+        }
+    }
 
 
     /**
@@ -134,13 +106,11 @@ public class App {
         }
 
         int retries = 10;
-        boolean shouldWait = false;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
-                if (shouldWait) {
-                    Thread.sleep(delay);
-                }
+                // Wait a bit for db to start
+                Thread.sleep(delay);
                 // Connect to database
                 //Added allowPublicKeyRetrieval=true to get Integration Tests
                 // to work. Possibly due to accessing from another class?
@@ -153,7 +123,6 @@ public class App {
                 System.out.println("Failed to connect to database attempt "
                         + Integer.toString(i));
                 System.out.println(sqle.getMessage());
-                shouldWait = true;
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
@@ -170,6 +139,16 @@ public class App {
             } catch (Exception e) {
                 System.out.println("Error closing connection to database");
             }
+        }
+    }
+
+    public void printCityReport(ArrayList<City> cities){
+        if(cities == null){
+            System.out.println("No cities found");
+            return;
+        }
+        for(City city : cities){
+            System.out.println(city);
         }
     }
 }

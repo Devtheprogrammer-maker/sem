@@ -29,4 +29,8 @@ public class City
      * Employee's salary
      */
     public int Population;
+
+
+    public City(Integer id, String name, String countryCode, String district, Integer population) {
+    }
 }
