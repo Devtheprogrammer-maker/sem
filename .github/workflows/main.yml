@@ -1,6 +1,5 @@
 1	name: A workflow for my App
 2	on: push
-  3
 4	jobs:
 5	  build:
 6	    name: Test Build Action
@@ -17,5 +16,5 @@
 17	        run: mvn -Dtest=com.napier.devops.AppTest test
 18	      - name: Package and Run docker compose
 19	        run: |
-  20	          mvn package -DskipTests
-  21	          docker compose up --abort-on-container-exit
+                  mvn package -DskipTests
+                  docker compose up --abort-on-container-exit
