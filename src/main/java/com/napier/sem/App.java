@@ -30,8 +30,8 @@ public class App {
         a.disconnect();
     }
 
-    public ArrayList<City> getCities() {
-        ArrayList<City> cities = new ArrayList<>();
+    public ArrayList<com.napier.devops.City> getCities() {
+        ArrayList<com.napier.devops.City> cities = new ArrayList<>();
         try {
 
             // Create an SQL statement
@@ -47,7 +47,7 @@ public class App {
                 String countryCode = rset.getString("CountryCode");
                 String district = rset.getString("District");
                 Integer population = rset.getInt("Population");
-                City city = new City();
+                com.napier.devops.City city = new com.napier.devops.City(id, name, countryCode, district, population);
                 cities.add(city);
             }
 
@@ -85,6 +85,34 @@ public class App {
             System.out.println("Failed to get details");
             return;
         }
+    }
+
+    public com.napier.devops.City getCity(int id) {
+        com.napier.devops.City city = null;
+        try {
+
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String sql = "select * from city where ID = " + id;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(sql);
+            //cycle
+            if (rset.next()) {
+                String name = rset.getString("Name");
+                String countryCode = rset.getString("CountryCode");
+                String district = rset.getString("District");
+                Integer population = rset.getInt("Population");
+                city = new com.napier.devops.City(id, name, countryCode, district, population);
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+        return  city;
     }
 
 
@@ -141,12 +169,12 @@ public class App {
         }
     }
 
-    public void printCityReport(ArrayList<City> cities){
+    public void printCityReport(ArrayList<com.napier.devops.City> cities){
         if(cities == null){
             System.out.println("No cities found");
             return;
         }
-        for(City city : cities){
+        for(com.napier.devops.City city : cities){
             System.out.println(city);
         }
     }
