@@ -1,4 +1,4 @@
-package com.napier.devops;
+package com.napier.sem;
 
 /**
  * Object representation of the City Table from World database

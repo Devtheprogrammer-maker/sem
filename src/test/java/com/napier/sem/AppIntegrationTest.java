@@ -21,7 +21,7 @@ public class AppIntegrationTest
     @Test
     void testGetCity()
     {
-        com.napier.devops.City city = app.getCity(1);
+        com.napier.sem.City city = app.getCity(1);
         assertEquals("Kabul", city.getName());
         System.out.println("successfully retrieved " + city);
     }

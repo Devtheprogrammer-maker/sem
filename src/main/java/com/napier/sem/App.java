@@ -30,8 +30,8 @@ public class App {
         a.disconnect();
     }
 
-    public ArrayList<com.napier.devops.City> getCities() {
-        ArrayList<com.napier.devops.City> cities = new ArrayList<>();
+    public ArrayList<com.napier.sem.City> getCities() {
+        ArrayList<com.napier.sem.City> cities = new ArrayList<>();
         try {
 
             // Create an SQL statement
@@ -47,7 +47,7 @@ public class App {
                 String countryCode = rset.getString("CountryCode");
                 String district = rset.getString("District");
                 Integer population = rset.getInt("Population");
-                com.napier.devops.City city = new com.napier.devops.City(id, name, countryCode, district, population);
+                com.napier.sem.City city = new com.napier.sem.City(id, name, countryCode, district, population);
                 cities.add(city);
             }
 
@@ -87,8 +87,8 @@ public class App {
         }
     }
 
-    public com.napier.devops.City getCity(int id) {
-        com.napier.devops.City city = null;
+    public com.napier.sem.City getCity(int id) {
+        com.napier.sem.City city = null;
         try {
 
             // Create an SQL statement
@@ -103,7 +103,7 @@ public class App {
                 String countryCode = rset.getString("CountryCode");
                 String district = rset.getString("District");
                 Integer population = rset.getInt("Population");
-                city = new com.napier.devops.City(id, name, countryCode, district, population);
+                city = new com.napier.sem.City(id, name, countryCode, district, population);
 
             }
 
@@ -169,12 +169,12 @@ public class App {
         }
     }
 
-    public void printCityReport(ArrayList<com.napier.devops.City> cities){
+    public void printCityReport(ArrayList<com.napier.sem.City> cities){
         if(cities == null){
             System.out.println("No cities found");
             return;
         }
-        for(com.napier.devops.City city : cities){
+        for(com.napier.sem.City city : cities){
             System.out.println(city);
         }
     }
