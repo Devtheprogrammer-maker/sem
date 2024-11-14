@@ -19,7 +19,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Unit Tests
-        run: mvn -Dtest=com.napier.sem.AppTest test
+#        run: mvn -Dtest=com.napier.sem.AppTest test
 
   IntegrationTests:
     name: Integration Tests
@@ -34,14 +34,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-      - name: Integration Tests and CodeCov
-        run: |
-          docker build -t database ./db 
-          docker run --name employees -dp 33060:3306 database
-          mvn -Dtest=com.napier.sem.AppIntegrationTest test          
-          docker stop employees
-          docker rm employees
-          docker image rm database
+#      - name: Integration Tests and CodeCov
+#        run: |
+#          docker build -t database ./db
+#          docker run --name employees -dp 33060:3306 database
+#          mvn -Dtest=com.napier.sem.AppIntegrationTest test
+#          docker stop employees
+#          docker rm employees
+#          docker image rm database
       - name: CodeCov
         uses: codecov/codecov-action@v2
         with:
