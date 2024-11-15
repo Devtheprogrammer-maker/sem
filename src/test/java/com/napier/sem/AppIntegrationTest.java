@@ -24,4 +24,12 @@ public class AppIntegrationTest
 
         assertEquals(5, 5);
     }
+
+    @Test
+    void testGetCity()
+    {
+        City city = app.getCity(1);
+        assertEquals("Kabul", city.getName());
+        System.out.println("successfully retrieved " + city);
+    }
 }

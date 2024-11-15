@@ -23,15 +23,18 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
+//        City cities = a.getCity(1);
+//        a.printCityReport(a.getCities());
+
         a.printCityReport(a.getCities());
-        a.report2();
+//        a.report2();
 
         // Disconnect from database
         a.disconnect();
     }
 
-    public ArrayList<com.napier.sem.City> getCities() {
-        ArrayList<com.napier.sem.City> cities = new ArrayList<>();
+    public ArrayList<City> getCities() {
+        ArrayList<City> cities = new ArrayList<>();
         try {
 
             // Create an SQL statement
@@ -87,8 +90,8 @@ public class App {
         }
     }
 
-    public com.napier.sem.City getCity(int id) {
-        com.napier.sem.City city = null;
+    public City getCity(int id) {
+        City city = null;
         try {
 
             // Create an SQL statement
@@ -103,7 +106,7 @@ public class App {
                 String countryCode = rset.getString("CountryCode");
                 String district = rset.getString("District");
                 Integer population = rset.getInt("Population");
-                city = new com.napier.sem.City(id, name, countryCode, district, population);
+                city = new City(id, name, countryCode, district, population);
 
             }
 
@@ -169,12 +172,12 @@ public class App {
         }
     }
 
-    public void printCityReport(ArrayList<com.napier.sem.City> cities){
+    public void printCityReport(ArrayList<City> cities){
         if(cities == null){
             System.out.println("No cities found");
             return;
         }
-        for(com.napier.sem.City city : cities){
+        for(City city : cities){
             System.out.println(city);
         }
     }

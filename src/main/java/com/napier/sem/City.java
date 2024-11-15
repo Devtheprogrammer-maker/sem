@@ -11,11 +11,11 @@ public class City {
     private long population;
 
     public City(int id, String name, String countryCode, String district, Integer population) {
-        this.id = this.id;
-        this.name = this.name;
-        this.countryCode = this.countryCode;
-        this.district = this.district;
-        this.population = this.population;
+        this.id = id;
+        this.name = name;
+        this.countryCode = countryCode;
+        this.district = district;
+        this.population = population;
     }
 
     public long getId() {
@@ -40,8 +40,12 @@ public class City {
 
     @Override
     public String toString() {
-        return "City{" + "id=" + id + ", name='" + name + '\''
-                + ", countryCode='" + countryCode + '\'' + ", district='"
-                + district + '\'' + ", population=" + population + '}';
+        return "City{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", district='" + district + '\'' +
+                ", population=" + population +
+                '}';
     }
 }
