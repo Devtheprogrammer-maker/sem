@@ -66,5 +66,12 @@ jobs:
         run: |
           mvn package -DskipTests
           docker compose up --abort-on-container-exit
-      - name: List all running containers
-        run: docker ps -a
+      - name: Copy Output
+        run: docker container cp sem-app-1:./tmp/reports ./
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: reports # The branch the action should deploy to.
+          folder: reports # The folder we are copying
+#      - name: List all running containers
+#        run: docker ps -a
