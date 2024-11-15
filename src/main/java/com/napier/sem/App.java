@@ -23,12 +23,11 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-//        City cities = a.getCity(1);
+        ArrayList<City> cities = a.getCities();
+        a.outputCityReport(cities, "CityReport.md");
+
 //        a.printCityReport(a.getCities());
-
-        a.printCityReport(a.getCities());
 //        a.report2();
-
         // Disconnect from database
         a.disconnect();
     }
@@ -181,4 +180,35 @@ public class App {
             System.out.println(city);
         }
     }
+
+    public void outputCityReport(ArrayList<City> cities, String filename) {
+        if (cities == null) {
+            System.out.println("No cities found");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Markdown table header
+        sb.append("| ID | Name | Country Code | District | Population |\r\n");
+        sb.append("| --- | --- | --- | --- | --- |\r\n");
+
+        // Add each city as a row
+        for (City city : cities) {
+            sb.append("| ").append(city.getId()).append(" | ")
+                    .append(city.getName()).append(" | ")
+                    .append(city.getCountryCode()).append(" | ")
+                    .append(city.getDistrict()).append(" | ")
+                    .append(city.getPopulation()).append(" |\r\n");
+        }
+
+        try {
+            new File("./reports/").mkdir(); // Create the directory if it doesn't exist
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/" + filename)));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
